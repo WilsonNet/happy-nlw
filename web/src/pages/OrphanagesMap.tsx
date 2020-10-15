@@ -44,7 +44,7 @@ function OrphanagesMap() {
             closeButton={false}
             minWidth={240}
             maxWidth={240}
-            // className="map-popup"
+            className="map-popup"
           >
             Lar Legal
             <Link to="!">
