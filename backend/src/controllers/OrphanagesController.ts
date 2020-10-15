@@ -1,14 +1,17 @@
 import Orphanage from '../models/Orphanage';
 import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
+import orphanages_view from '../views/orphanages_view';
 
 export default {
   async index(request: Request, response: Response) {
     const orphanageRepository = getRepository(Orphanage);
 
-    const orphanages = await orphanageRepository.find();
+    const orphanages = await orphanageRepository.find({
+      relations: ['images'],
+    });
 
-    return response.json(orphanages);
+    return response.json(orphanages_view.renderMany(orphanages));
   },
 
   async show(request: Request, response: Response) {
@@ -16,9 +19,11 @@ export default {
 
     const orphanageRepository = getRepository(Orphanage);
 
-    const orphanages = await orphanageRepository.findOneOrFail(id);
+    const orphanage = await orphanageRepository.findOneOrFail(id, {
+      relations: ['images'],
+    });
 
-    return response.json(orphanages);
+    return response.json(orphanages_view.render(orphanage));
   },
 
   async create(request: Request, response: Response) {
@@ -49,8 +54,6 @@ export default {
       open_on_weekends,
       images,
     });
-
-    console.log("create -> orphanage", orphanage)
 
     await orphanageRepository.save(orphanage);
 
