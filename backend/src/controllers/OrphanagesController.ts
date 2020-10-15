@@ -3,6 +3,14 @@ import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
 
 export default {
+  async index(request: Request, response: Response) {
+    const orphanageRepository = getRepository(Orphanage);
+
+    const orphanages = await orphanageRepository.find();
+
+    return response.json(orphanages);
+  },
+
   async create(request: Request, response: Response) {
     const {
       name,
