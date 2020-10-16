@@ -9,7 +9,7 @@ import api from '../services/api';
 
 interface Orphanage {
   id: number,
-  name: String,
+  name: string,
   latitude: number,
   longitude: number
 }
