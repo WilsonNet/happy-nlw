@@ -55,10 +55,7 @@ export default function Orphanage() {
           <div className="images">
             {orphanage.images.map((image) => (
               <button className="active" key={image.id} type="button">
-                <img
-                  src={image.url}
-                  alt={orphanage.name}
-                />
+                <img src={image.url} alt={orphanage.name} />
               </button>
             ))}
           </div>
@@ -89,7 +86,11 @@ export default function Orphanage() {
               </Map>
 
               <footer>
-                <a href="!">{orphanage.instructions}</a>
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${orphanage.latitude},${orphanage.longitude}`}
+                >
+                  {orphanage.instructions}
+                </a>
               </footer>
             </div>
 
